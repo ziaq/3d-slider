@@ -1,0 +1,140 @@
+@font-face { src: url("../fonts/assassin.woff2") format("woff2"); font-family: "assassin-st"; font-weight: 700; font-style: italic; }
+
+body {
+	min-width: 320px;
+	position: relative;
+	overflow-x: hidden;
+  margin: 0;
+  height: 100%;
+}
+
+.showcase {
+  background-color: black;
+  height: 100%;
+  position: relative;
+  color: white;
+  overflow: hidden;
+}
+.showcase::before {
+  content: ''; /* обязательно нужно писать, иначе псевдоэлемент не работает */
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  z-index: 1; /* поверх основного контейнера с видео */
+  box-shadow: inset 0 0 500px black; /* черная виньетка (тень внутрь контейнера)
+                                          вставляем весь этот псевдоэлемент */
+}
+.showcase::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  background-image: url(../images/light.png);
+  background-size: cover; /* масшабирует фоновое изображение */
+  background-repeat: no-repeat; /* иначе может вылезать снизу повтор */
+  background-position: center -65px; /* начальное положение фотонового изображения */
+  animation: kf-light 3s ease-in-out infinite;
+}
+
+.showcase__video {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* видео заполяет весь контейнер адаптивно */
+  opacity: .7;
+}
+
+.showcase__content-wrapper {
+  position: relative;
+  z-index: 2;
+  padding: 120px 0;
+  height: 100%;
+  width: 100%;
+}
+
+.showcase__content-wrapper::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-image: url(../images/glow.png);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  animation: kf-glow 1.8s ease-in-out infinite;
+}
+
+.showcase__header {
+  position: absolute;
+  text-align: center;
+  width: 100%;
+  z-index: 1;
+  top: 20px;
+  font-family:'assassin-st';
+  font-size: 32px;
+  color: rgba(255, 255, 255, .75);
+}
+
+.showcase__header span {
+  color: #CC8869;
+}
+
+.showcase-carousel__item {
+  position: relative;
+  height: calc(100vh - 240px); /* вычитаем padding верха и низа .showcase__content-wrapper */
+  text-align: center;
+  opacity: .25;
+  transform: scale(.75);
+  transition: opacity 1.8s ease-out, transform 1.8s ease-out;
+}
+.showcase-carousel__item.swiper-slide-active {
+  opacity: .8;
+  transform: scale(.98);
+}
+
+.showcase-carousel__image-wrapper > * { /* (> *) - означает что любой его потомок будет иметь теже стили */
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  perspective: 150px;
+  transform-style: preserve-3d; /* потомки будут сохранять 3d */
+}
+.showcase-carousel__image {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+/* Пульсирующие анимация для света и glow */
+@keyframes kf-light {
+  0% {
+    opacity: .2;
+  }
+  50% {
+    opacity: .3;
+  }
+  100% {
+    opacity: .2;
+  }
+}
+
+@keyframes kf-glow {
+  0% {
+    opacity: .6;
+  }
+  50% {
+    opacity: .8;
+  }
+  100% {
+    opacity: .6;
+  }
+}
