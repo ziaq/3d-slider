@@ -12,6 +12,6 @@ document.addEventListener('DOMContentLoaded', function() {
     }
   })
 
-  document.querySelector('video').playbackRate = 2; // ускоряем видео в два раза
+  document.querySelector('video').playbackRate = 2; // Speed up the video twice
 
 })

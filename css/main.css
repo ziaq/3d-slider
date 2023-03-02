@@ -20,13 +20,12 @@ body {
   overflow: hidden;
 }
 .showcase::before {
-  content: ''; /* обязательно нужно писать, иначе псевдоэлемент не работает */
+  content: ''; /* Necessary to write this line otherwise pseodu element doen't work */
   width: 100%;
   height: 100%;
   position: absolute;
-  z-index: 1; /* поверх основного контейнера с видео */
-  box-shadow: inset 0 0 500px black; /* черная виньетка (тень внутрь контейнера)
-                                          вставляем весь этот псевдоэлемент */
+  z-index: 1; /* Upper then main video container */
+  box-shadow: inset 0 0 500px black; /* Black vignette (a shadow inside borders) */
 }
 .showcase::after {
   content: '';
@@ -36,9 +35,9 @@ body {
   left: 0;
   bottom: 0;
   background-image: url(../images/light.png);
-  background-size: cover; /* масшабирует фоновое изображение */
-  background-repeat: no-repeat; /* иначе может вылезать снизу повтор */
-  background-position: center -65px; /* начальное положение фотонового изображения */
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center -65px; /* Default position of image */
   animation: kf-light 3s ease-in-out infinite;
 }
 
@@ -48,7 +47,7 @@ body {
   left: 0;
   width: 100%;
   height: 100%;
-  object-fit: cover; /* видео заполяет весь контейнер адаптивно */
+  object-fit: cover; /* Video cover full container adaptive */
   opacity: .7;
 }
 
@@ -89,26 +88,26 @@ body {
   color: #CC8869;
 }
 
-.showcase-carousel .swiper-wrapper { /* swiper-wrapper технический класс swiper, здесь сделали кастом анимацию */
+.showcase-carousel .swiper-wrapper { /* swiper-wrapper is technical class of swiper, there we make custom animation */
   transition: var(--transition);
 }
 
 .showcase-carousel__item {
   position: relative;
-  height: calc(100vh - 240px); /* вычитаем padding верха и низа .showcase__content-wrapper */
+  height: calc(100vh - 240px); /* Subtract paddings .showcase__content-wrapper */
   text-align: center;
   opacity: .25;
   transform: scale(.75);
   transition: opacity 1.8s var(--transition), transform 1.8s ease-out;
 }
-.showcase-carousel__item::after { /* черное пятно внизу типа тень от картинки */
+.showcase-carousel__item::after { /* Black spot for showing shadow under image */
   content: '';
   width: 120px;
   height: 0;
   position: absolute;
   box-shadow: 0 0 45px 10px #010101;
   bottom: 5px;
-  left: calc(50% - 60px); /* начинается ровно от центра и минус половина ширины */
+  left: calc(50% - 60px); /* Begin from center and subtract a half of width */
 }
 .showcase-carousel__item p {
   position: absolute;
@@ -124,12 +123,12 @@ body {
   transform: scale(.98);
 }
 
-.showcase-carousel__image-wrapper > * { /* (> *) - означает что любой его потомок будет иметь теже стили */
+.showcase-carousel__image-wrapper > * {
   position: absolute;
   height: 100%;
   width: 100%;
   perspective: 150px;
-  transform-style: preserve-3d; /* потомки будут сохранять 3d */
+  transform-style: preserve-3d; /* Children will keep 3d */
 }
 .showcase-carousel__image {
   position: absolute;
@@ -139,20 +138,19 @@ body {
   background-position: center;
   background-repeat: no-repeat;
 }
-.showcase-carousel__image-left { /* вот тут вся магия, делим картинку на две половины вертикальной линией */
+.showcase-carousel__image-left { /* There is all magic we split image by vertical line into two halfs */
   perspective-origin: left center;
-  clip-path: polygon(0 0, 50% 0, 50% 100%, 0 100%); /* верхняя левая точка x y, 50% слева 0 сверху,
-                                                      50% слева 100% сверху, 0 слева 100% сверху*/
+  clip-path: polygon(0 0, 50% 0, 50% 100%, 0 100%);
 }
-.showcase-carousel__image-right { /* правая половина картинки */
+.showcase-carousel__image-right { /* Right side of image */
   perspective-origin: right center;
-  clip-path: polygon(50% 0, 100% 0, 100% 100%, 50% 100%); /* 4 точки, отсчет слева и сверху у каждой */
+  clip-path: polygon(50% 0, 100% 0, 100% 100%, 50% 100%);
 }
-.showcase-carousel__image-left .showcase-carousel__image { /* применяем именно к изображнию, а не обертке для стороны */
+.showcase-carousel__image-left .showcase-carousel__image { /* Apply exact to image, not to wrapper */
   animation: kf-left-side 2s ease-in-out infinite;
   animation-direction: alternate;
 }
-.showcase-carousel__image-right .showcase-carousel__image { /* применяем именно к изображнию, а не обертке для стороны */
+.showcase-carousel__image-right .showcase-carousel__image { /* Apply exact to image, not to wrapper */
   animation: kf-right-side 2s ease-in-out infinite;
   animation-direction: alternate;
 }
@@ -161,17 +159,17 @@ body {
   overflow: hidden;
   position: absolute;
   z-index: 2;
-  top: 0; /* нули на всех сторонах чтобы область действия была весь экран */
+  top: 0; /* All zeros for scope of action being whole screen */
   right: 0;
   bottom: 0;
   left: 0;
   cursor: pointer;
 }
-.showcase_navigation > * { /* делим экран на две области вертикальной линией */
+.showcase_navigation > * { /* Split screen into two halfs by vertical line */
   position: absolute;
   height: 100%;
   width: 50%;
-  outline: none; /* чтобы на мобилах не появлялись рамки */
+  outline: none; /* For remove borders on mobiles  */
   font-family: assassin-st;
   opacity: 0;
   transition: opacity .75s ease-out;
@@ -180,23 +178,23 @@ body {
 .showcase_navigation > *:hover {
   opacity: .25;
 }
-.showcase-navigation__next { /* правую область смещаем на ее логичное место */
+.showcase-navigation__next {
   right: 0;
 }
-.showcase-navigation__prev p { /* правую область смещаем на ее логичное место */
+.showcase-navigation__prev p {
   position: absolute;
   transform: rotate(-90deg);
   left: 30px;
   top: 40vh;
 }
-.showcase-navigation__next p { /* правую область смещаем на ее логичное место */
+.showcase-navigation__next p {
   position: absolute;
   transform: rotate(90deg);
   right: 30px;
   top: 40vh;
 }
 
-/* Пульсирующие анимация для света и glow */
+/* Pulse animation for light and glow */
 @keyframes kf-light {
   0% {
     opacity: .2;
